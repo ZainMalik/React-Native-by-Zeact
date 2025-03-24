@@ -1,5 +1,8 @@
 import { StyleSheet, Appearance, Platform, SafeAreaView, ScrollView, FlatList, View, Text, Image } from "react-native";
 import { Colors } from '@/constants/Colors';
+import { MENU_ITEMS } from '@/constants/MenuItems';
+import MENU_IMAGES from '@/constants/MenuImages';
+
 
 export default function MenuScreen() {
     const colorScheme = Appearance.getColorScheme();
@@ -10,14 +13,15 @@ export default function MenuScreen() {
     return (
         <Container style={styles.container}>
            <FlatList
-           data={[]}
-           renderItem={({item}) => (
-               <View>
-                   <Text>{item.name}</Text>
-                   <Image source={item.image} />
-                   <Text>{item.price}</Text>
-               </View>
-           )}
+                data={MENU_ITEMS}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({item}) => (
+                    <View>
+                        <Text>{item.title}</Text>
+                        <Text>{item.description}</Text>
+                        <Image source={MENU_IMAGES[item.id - 1]} />
+                    </View>
+                )}
            >
            </FlatList>
         </Container>
